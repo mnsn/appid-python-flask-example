@@ -1,0 +1,92 @@
+
+html, body {
+    height: 100%;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+h1 {
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 24px;
+    color: #4178BE;
+}
+
+.main-container {
+    flex: 1 1 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+}
+
+.top-container {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    background: #EFF2F5;
+    box-shadow: 0 2px 2px 0 rgba(140, 155, 165, 0.25);
+    overflow: hidden;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.bottom-container {
+    display: flex;
+    width: 100%;
+    background: white;
+    overflow: hidden;
+    flex-flow: column nowrap;
+    visibility: hidden;
+}
+
+.flex-top {
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 15px;
+    font-size: 14px;
+    color: #2D3F49 ;
+}
+
+.flex-bottom {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 75px;
+    margin-top: 15px;
+}
+
+.back-icon {
+    margin-top: 15px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.token-info {
+    font-family: Courier, sans-serif;
+    font-size: 14px;
+    color: #152934;
+    line-height: 20px;
+    background: #EFF2F5;
+    box-shadow: 0 2px 2px 0 rgba(140,155,165,0.25);
+    padding: 20px 0 20px 20px;
+    margin-right: 90px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}

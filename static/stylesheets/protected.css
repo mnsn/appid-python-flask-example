@@ -1,0 +1,131 @@
+
+html, body {
+    height: 100%;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+h1 {
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 30px;
+    color: #4178BE;
+}
+
+h2 {
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 18px;
+    color: #0F212E;
+    line-height: 24px;
+}
+
+h3 {
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 14px;
+    color: #FF7832;
+    line-height: 18px;
+    margin-left: 15px;
+}
+
+h4 {
+    font-family: Arial;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.main-container {
+    flex: 1 1 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    visibility: hidden;
+}
+
+.top-container {
+    display: flex;
+    flex-flow: row nowrap;
+    max-height: 40%;
+    min-height: 40%;
+    max-width: 100%;
+    width: 100%;
+    background: #EFF2F5;
+    box-shadow: 0 2px 2px 0 rgba(140, 155, 165, 0.25);
+    overflow: hidden;
+}
+
+.bottom-container {
+    align-items: center;
+    width: 100%;
+    background: white;
+    overflow: hidden;
+}
+
+.flex-top {
+    flex: none;
+    font-size: 14px;
+    color: #42535C;
+    line-height: 20px;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+.flex-bottom {
+    flex: 1;
+    margin-left: 155px;
+    margin-top: 50px;
+}
+
+.user-profile {
+    border-radius: 50%;
+    width:60px;
+    height:60px;
+    margin-top: 10px;
+}
+
+.button {
+    font-family: Arial;
+    font-weight: bold;
+    background-color: #4178BE;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-left: -50px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.warning-icon {
+    margin-top: -3px;
+}
+.warning {
+    display: flex;
+    margin-top: -20px;
+}
+
+.warning-message {
+    display: flex;
+    margin-top: -30px;
+    margin-left: 33px;
+}
+
+.hide {
+    display: none;
+}
