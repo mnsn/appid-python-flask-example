@@ -114,7 +114,7 @@ Both can be found in the service credentials section in appid dashboard or extra
 If it had no error, the token endpoint return status code 200 and a JSON contains the 2 tokens.
 in my code, I saved them on the session and redirected to the protected resource, which validate those tokens and if they are valid shows the page.
 
-### validating the tokens
+## validating the tokens
 appid tokens are signed by appid private key to validate them you need to get appid public key and open them. under `token-utils.py' you can see the code I used to open them ,I used pyJWT which is a big library to handle jwt tokens
 
 ```python
