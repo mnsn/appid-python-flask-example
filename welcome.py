@@ -35,35 +35,26 @@ TOKEN_PATH = "/token"
 @app.route('/')
 def Welcome():
     return app.send_static_file('index.html')
-@app.route('/myapp')
-def WelcomeToMyapp():
-    return 'Welcome again to my app running on Bluemix!'
-@app.route('/validateToken/<token>')
-def validateTokenEndpoint(token):
-    if (validateToken(token)):
-        return 'valid'
-    else:
-        return 'invalid'
 def validateToken(token):
-
     publickey = retrievePublicKey(ServiceConfig.serverUrl)
     pem = getPublicKeyPem(publickey)
     return verifyToken(token,pem)
+#when connecting to protected resource we have few steps need to be done
+
+ #1. Checking if the user already authenticated, after successful authenticationThis code saves the token on the session on APPID_AUTH_CONTEX parameter
+ #2. If the user doesn't authenticated or have invalid token, the authorization proccess need to start
+ #3. if the token is valid the user can access the protected resource
 @app.route('/protected')
 def protected():
-    #return render_template('protected.html', name='asaf',picture="m")
-    #return app.send_static_file('protected.html', name='asaf',picture="m")
-    tokens =session[WebAppStrategy['AUTH_CONTEXT']]
-    if (session[WebAppStrategy['AUTH_CONTEXT']]):
-        print tokens
+    tokens = session.get(WebAppStrategy['AUTH_CONTEXT'])
+    if (tokens):
         publickey = retrievePublicKey(ServiceConfig.serverUrl)
         pem = getPublicKeyPem(publickey)
-        token = tokens.get('id_token')
-        print 'token:'
-        print token
-
-        idTokenPayload = verifyToken(token,pem)
-        if (not idTokenPayload):
+        idToken = tokens.get('id_token')
+        accessToken = tokens.get('access_token')
+        idTokenPayload = verifyToken(idToken,pem)
+        accessTokenPayload =verifyToken(accessToken,pem)
+        if (not idTokenPayload or not accessTokenPayload):
             session[WebAppStrategy['AUTH_CONTEXT']]=None
             return startAuthorization()
         else:
@@ -72,9 +63,13 @@ def protected():
             return render_template('protected.html', name=idTokenPayload.get('name'),picture=idTokenPayload.get('picture'))
     else:
         return startAuthorization()
+#To start the authorization process you need to redirect the user to appid endpoint.
+#with the clientid and redirecturi as query parameters.
+#when binding appid to your service the global enviorement contains appid credintials which contain the clientid and server url, I've created a class called serviceConfig that read that data, you can use this class or copy this data from the service credintials section in app id dashboard
+#after reading the data, redirect the user to appid url with redirecturi to your application and clientid and the login widget will be presented to the user
 @app.route('/startAuthorization')
 def startAuthorization():
-    serviceConfig=ServiceConfig
+    serviceConfig=ServiceConfig()
     clientId = serviceConfig.clientId
 
     authorizationEndpoint = serviceConfig.serverUrl + AUTHORIZATION_PATH
@@ -98,14 +93,14 @@ def handleCallback(grantCode):
     if (type(tokens) is str):
         return tokens#it's error
     else:
-        if (retriveTokens(tokens['access_token'])):
+        if (tokens['access_token']):
             session[WebAppStrategy['AUTH_CONTEXT']]=tokens
             return protected()
         else:
             return 'fail'
 
 def retriveTokens(grantCode):
-    serviceConfig=ServiceConfig
+    serviceConfig=ServiceConfig()
     clientId = serviceConfig.clientId
     secret = serviceConfig.secret
     tokenEndpoint = serviceConfig.serverUrl + TOKEN_PATH
