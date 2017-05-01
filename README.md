@@ -1,9 +1,9 @@
 # IBM appid-python-flask-example
-This example is for developers that want to use [IBM App ID](https://console.ng.bluemix.net/docs/services/appid/index.html)  service to protect their python server or create an end-to-end flow of appid authentication with python.
+This example is for developers who want to use the [IBM App ID](https://console.ng.bluemix.net/docs/services/appid/index.html) service to protect their python server, or to create an end-to-end flow authentication with python.
 
 
 ## Choose your protected resource
-A protected resource is an endpoint that you want the user to identify before connecting to it, in this example, I called that endpoint `/protected`
+A protected resource is an endpoint that requires a user to authenticate before connecting to it. In this example, I call that endpoint `/protected`
 ```python
 from flask import Flask, session,render_template
 WebAppStrategy['AUTH_CONTEXT'] = "APPID_AUTH_CONTEXT";
@@ -27,13 +27,14 @@ def protected():
     else:
         return startAuthorization()
 ```
-when connecting to protected resource, there are few steps need to be done, to make sure the user has a valid token:
- 1. Checking if the user already authenticated. after successful authentication, this example saves the token on the session in APPID_AUTH_CONTEX parameter
- 2. If the user does not authenticate or have an invalid token, the authorization process needs to start.
- 3. If the token is valid the user can access the protected resource.
+When connecting to a protected resource, there are few steps to make sure the user has a valid token:
+ 1. Check if the user already authenticated. After successful authentication, this example saves the token for the session in APPID_AUTH_CONTEX parameter
+ 2. If the user has a valid token, the user can access the protected resource
+ 3. If the user is not authenticated, or has an invalid token, the authorization process needs to start.
+
 
 ## Authorization proccess
-The authorization process is meant to authorize the user, in the end of the process, you can know the user is who he says he is by verifying his token
+The authorization process lets you authorize the user to access the protected resource. At the end of the process, you can ensure the user is who he claims to be by verifying his token.
 
 ```python
 @app.route('/startAuthorization')
@@ -46,16 +47,15 @@ def startAuthorization():
     return redirect("{}?client_id={}&response_type=code&redirect_uri={}&scope=appid_default".format(authorizationEndpoint,clientId,redirectUri))
 
 ```
-To start the authorization process, you need to redirect the user to app-id endpoint.
-with the client id and redirect URI as query parameters.
+To start the authorization process, you need to redirect the user to the app-id endpoint with the client id and redirect URI as query parameters.
 
-when binding appid to your application.
-Your application global environment contains appid credentials which contain the client id, server URL and more.
-I've created a class called serviceConfig that read that data, you can use this class or copy this data from the service credentials section in the app id dashboard.
-after reading the data, redirect the user to appid URL with the redirect URI to your application and your client id, after the redirect the login widget will be presented to the user
+When binding appid to your application:
+Your application global environment contains appid credentials that contain the client id, server URL and more.
+I've created a class called serviceConfig that reads that data. You can use this class or copy this data from the service credentials section in the app id dashboard.
+After reading the data, redirect the user to the appid URL with the redirect URI to your application, and your client id. After the redirect, the login widget will be presented to the user
 
 ## Redirect endpoint
-After the user has authorized, s/he will be redirected to your redirect endpoint with either error or code that can replace to the appid id token and access token
+After the user has authorized, he will be redirected to your redirect endpoint with either an error or a code that can be exchanged for an id token and an access token.
 ```python
 @app.route('/afterauth')
 def afterauth():
@@ -68,9 +68,9 @@ def afterauth():
     else:
         return '?'
 ```
-If there was an error (for instance the user decided not to grant access to your app).
- I returned it to the user (in production you probably want to redirect him back to the login screen, or let him continue unauthenticated to unprotected resources, depends on your flow)
-if the response contains a code I'll switch it with appid tokens
+If there is an error (for instance the user decided not to grant access to your app),
+I return it to the user (in production you probably want to redirect him back to the login screen, or let him continue unauthenticated to unprotected resources, depending on your flow).
+If the response contains a code, I exchange it for appid tokens.
 
 ## replace code with tokens
 
@@ -103,19 +103,19 @@ def handleCallback(grantCode):
 
 ```
 to exchange code with an access token and an id token, you need to send a post request to the token endpoint with:
-* client_id - You can find it in the service credentials section in your dashboard or just bind your app to appid and serviceConfig class will extract it.
-* grunt_type - It always "authorization_code"
+* client_id - You can find it in the service credentials section in your dashboard or just bind your app to appid, and serviceConfig class will extract it.
+* grunt_type - It's always "authorization_code"
 * redirect_uri - The redirect URI from the authorization process. this is part of the open-id spec, appid service will validate that redirect URI in the code exchange process.
 * code - The code you got after the authorization process.
 
-this endpoint is protected by your client id as the username and your secret as the password.
-Both can be found in the service credentials section in appid dashboard or extracted at runtime using ServiceConfig class
+this endpoint is protected with your client id as the username and your secret as the password.
+Both can be found in the service credentials section in appid dashboard or extracted at runtime using the ServiceConfig class
 
 If it had no error, the token endpoint return status code 200 and a JSON contains the 2 tokens.
-in my code, I saved them on the session and redirected to the protected resource, which validate those tokens and if they are valid shows the page.
+In my code, I saved them for the session and redirected to the protected resource, which validates those tokens, and if they are valid shows the page.
 
 ## validating the tokens
-appid tokens are signed by appid private key to validate them you need to get appid public key and open them. under `token-utils.py' you can see the code I used to open them ,I used pyJWT which is a big library to handle jwt tokens
+appid tokens are signed by appid private key. To validate them you need to get appid public key and open them. Under `token-utils.py' you can see the code I used to open them ,I used pyJWT which is a big library to handle jwt tokens
 
 ```python
     import jwt
@@ -141,4 +141,4 @@ appid tokens are signed by appid private key to validate them you need to get ap
         #some code I found in the internet to convert RS256 to pem
 ```
 
-That's it after finishing this process your website is fully protected by appid.
+That's it! After finishing this process your website is fully protected by appid.
