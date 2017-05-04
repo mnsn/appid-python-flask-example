@@ -1,4 +1,4 @@
-# IBM Bluemix App ID sample
+# IBM Bluemix App ID Python and Flask sample
 
 This example is meant for developers who want to use the [IBM Bluemix App ID](https://console.ng.bluemix.net/docs/services/appid/index.html) service to protect their python server, or to create an end-to-end flow authentication with python.
 
@@ -71,30 +71,7 @@ You can grant a user access to a protected resource by using the authorization p
   ```
   * If there is an error, such as the user didn't grant access to your app I return the code to the user. If you're using this in a production app, you could redirect them back to the login screen or allow them to continue unauthenticated to unprotected resources.
 
-4. Replace the code with an access token and an identity token. Send a post request to the token endpoint using the following variables:
-
-  <table>
-  <tr>
-    <th> Variable </th>
-    <th> Definition </th>
-  </tr>
-  <tr>
-    <td> <i> client id </i> </td>
-    <td> This can be found in the service credentials tab of your service dashboard. If your app is bound to App ID, the serviceConfig class will extract it. </td>
-  </tr>
-  <tr>
-    <td> <i> grunt_type </i> </td>
-    <td> Will always be <i>authorization_code</i>. </td>
-  </tr>
-  <tr>
-    <td> <i> redirect_uri </i> </td>
-    <td> The redirect URI you used in step 1. The service validates the URI in the code exchange process. </td>
-  </tr>
-  <tr>
-    <td> <i> code </i> </td>
-    <td> The code your received after step 1. </td>
-  </tr>
-  </table>
+4. Replace the code with an access token and an identity token and send a post request to the token endpoint using the following variables. The endpoint is protected with your client id as your username and your secret as the password.
 
   ```python
   def retriveTokens(grantCode):
@@ -123,6 +100,30 @@ You can grant a user access to a protected resource by using the authorization p
           else:
               return 'fail'
   ```
+
+  <table>
+  <tr>
+    <th> Variable </th>
+    <th> Definition </th>
+  </tr>
+  <tr>
+    <td> <i> client id </i> </td>
+    <td> This can be found in the service credentials tab of your service dashboard. If your app is bound to App ID, the serviceConfig class will extract it. </td>
+  </tr>
+  <tr>
+    <td> <i> grunt_type </i> </td>
+    <td> Will always be <i>authorization_code</i>. </td>
+  </tr>
+  <tr>
+    <td> <i> redirect_uri </i> </td>
+    <td> The redirect URI you used in step 1. The service validates the URI in the code exchange process. </td>
+  </tr>
+  <tr>
+    <td> <i> code </i> </td>
+    <td> The code your received after step 1. </td>
+  </tr>
+  </table>
+
   * If no error is returned, a JSON file contains the two tokens. In my code, I saved them for the session and redirected to the protected resource for validation.
 
 5. Validate the token. App ID tokens are signed with a private key. To validate, use the code in `token-utils.py` to open the key. I used the pyJWT library to handle jwt tokens.
