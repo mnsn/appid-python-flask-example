@@ -160,9 +160,9 @@ Congrats! Once you've finished the process, your website is fully protected.
 
 -----------------------------------------------------
 
-Your input is important to us: You can help shape the future of the App ID service. Try App ID and share your thoughts and wish list items below, or in our [developerWorks forum for Bluemix](https://developer.ibm.com/answers/smartspace/bluemix/)
+Your input is important to us: You can help shape the future of the App ID service. Try App ID and share your thoughts and wish list items below, or in our [developerWorks forum for Bluemix](https://developer.ibm.com/answers/smartspace/bluemix/).
 
-* [Try App ID](https://console.ng.bluemix.net/catalog/services/app-id)
-* [Tell Me why](https://youtu.be/cTn7l_J3tPg)
-* [Show Me Video](https://ibm.box.com/s/9y5o61ujl15pqyuin7y6jku1ii72d696)
-* [Documentation](https://console.ng.bluemix.net/docs/services/appid/index.html)
+* [Try App ID](https://console.ng.bluemix.net/catalog/services/app-id).
+* [Tell Me why](https://youtu.be/cTn7l_J3tPg).
+* [Show Me Video](https://ibm.box.com/s/9y5o61ujl15pqyuin7y6jku1ii72d696).
+* [Documentation](https://console.ng.bluemix.net/docs/services/appid/index.html).
