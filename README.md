@@ -1,9 +1,9 @@
 # IBM Bluemix App ID Python and Flask sample
 IBM Bluemix App ID helps developers to easily add authentication to their web and mobile apps with few lines of code, and secure their Cloud-native applications & services on Bluemix. App ID also helps manage user specific data that developers can use to build personalized app experiences. 
 
-App ID is designed to make it very simple for developers to quickly get authentication and authorization working, abstracting away complex security functions. For Android and iOS mobile apps and for Node.JS or Swift apps, App ID provides a set of [SDK-s](https://github.com/ibm-cloud-security). For other languages, you can use App ID's REST API-s.
+App ID is designed to make it very simple for developers to quickly get authentication and authorization working, abstracting away complex security functions. For Android and iOS mobile apps and for Node.JS or Swift apps, App ID provides a set of [SDKs](https://github.com/ibm-cloud-security). For other languages, you can use App ID's REST APIs.
 
-This example is meant for developers who want to use the [IBM Bluemix App ID](https://console.ng.bluemix.net/docs/services/appid/index.html) service to protect their python server, or to create an end-to-end flow authentication with python.
+This example is meant for developers who want to use the [IBM Bluemix App ID](https://console.ng.bluemix.net/docs/services/appid/index.html) service to protect their Python server, or to create an end-to-end flow authentication with Python.
 
 ## Specify your protected resource
 
@@ -123,7 +123,7 @@ You can grant a user access to a protected resource by using the authorization p
   </tr>
   <tr>
     <td> <i> code </i> </td>
-    <td> The code your received after step 1. </td>
+    <td> The code you received in step 1. </td>
   </tr>
   </table>
 
@@ -160,9 +160,9 @@ Congrats! Once you've finished the process, your website is fully protected.
 
 -----------------------------------------------------
 
-Your input is important to us: You can help shape the future of the App ID service. Try App ID and share your thoughts and wish list items below, or in our [developerWorks forum for Bluemix](https://developer.ibm.com/answers/smartspace/bluemix/).
+Your input is important to us! You can help shape the future of the App ID service. Try App ID and share your thoughts and wish list items below, or in our [developerWorks forum for Bluemix](https://developer.ibm.com/answers/smartspace/bluemix/).
 
-* [Try App ID](https://console.ng.bluemix.net/catalog/services/app-id).
-* [Tell Me why](https://youtu.be/cTn7l_J3tPg).
-* [Show Me Video](https://ibm.box.com/s/9y5o61ujl15pqyuin7y6jku1ii72d696).
-* [Documentation](https://console.ng.bluemix.net/docs/services/appid/index.html).
+* [Try App ID](https://console.ng.bluemix.net/catalog/services/app-id)
+* [Tell Me why](https://youtu.be/cTn7l_J3tPg)
+* [Show Me Video](https://ibm.box.com/s/9y5o61ujl15pqyuin7y6jku1ii72d696)
+* [Documentation](https://console.ng.bluemix.net/docs/services/appid/index.html)
