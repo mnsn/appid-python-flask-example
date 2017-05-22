@@ -78,14 +78,14 @@ You can grant a user access to a protected resource by using the authorization p
 
   ```python
   def retriveTokens(grantCode):
-      serviceConfig=ServiceConfig()
+      serviceConfig = ServiceConfig()
       clientId = serviceConfig.clientId
       secret = serviceConfig.secret
       tokenEndpoint = serviceConfig.serverUrl + TOKEN_PATH
       redirectUri = serviceConfig.redirectUri
   #    requests.post(url, data={}, auth=('user', 'pass'))
       r = requests.post(tokenEndpoint, data={"client_id": clientId,"grant_type": "authorization_code","redirect_uri": redirectUri,"code": grantCode
-  		}, auth=HTTPBasicAuth(clientId, secret))
+  		}, auth = HTTPBasicAuth(clientId, secret))
       print(r.status_code, r.reason)
       if (r.status_code is not 200):
           return 'fail'
@@ -93,12 +93,12 @@ You can grant a user access to a protected resource by using the authorization p
           return r.json()
 
   def handleCallback(grantCode):
-      tokens=retriveTokens(grantCode)
+      tokens = retriveTokens(grantCode)
       if (type(tokens) is str):
           return tokens#it's error
       else:
           if (tokens['access_token']):
-              session[WebAppStrategy['AUTH_CONTEXT']]=tokens
+              session[WebAppStrategy['AUTH_CONTEXT']] = tokens
               return protected()
           else:
               return 'fail'
