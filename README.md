@@ -21,9 +21,9 @@ This example is meant for developers who want to use the [IBM Bluemix App ID](ht
           idToken = tokens.get('id_token')
           accessToken = tokens.get('access_token')
           idTokenPayload = verifyToken(idToken,pem)
-          accessTokenPayload =verifyToken(accessToken,pem)
+          accessTokenPayload = verifyToken(accessToken,pem)
           if (not idTokenPayload or not accessTokenPayload):
-              session[WebAppStrategy['AUTH_CONTEXT']]=None
+              session[WebAppStrategy['AUTH_CONTEXT']] = None
               return startAuthorization()
           else:
               print('idTokenPayload')
@@ -48,7 +48,7 @@ You can grant a user access to a protected resource by using the authorization p
   ```python
   @app.route('/startAuthorization')
   def startAuthorization():
-      serviceConfig=ServiceConfig()
+      serviceConfig = ServiceConfig()
       clientId = serviceConfig.clientId
 
       authorizationEndpoint = serviceConfig.serverUrl + AUTHORIZATION_PATH
@@ -149,9 +149,9 @@ You can grant a user access to a protected resource by using the authorization p
       def retrievePublicKey(serverUrl):
           serverUrl = serverUrl + PUBLIC_KEY_PATH;
           content = urllib2.urlopen(serverUrl).read()
-          publicKeyJson=content;
+          publicKeyJson = content;
           return  publicKeyJson
-      def getPublicKeyPem(publicKeyJson=publicKeyJson):
+      def getPublicKeyPem(publicKeyJson = publicKeyJson):
           #some code I found in the internet to convert RS256 to pem
   ```
 
