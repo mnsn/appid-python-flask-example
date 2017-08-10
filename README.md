@@ -178,11 +178,7 @@ You can grant a user access to a protected resource by using the authorization p
                 return False; 
         else:
             return response.text
-        ```
-        
-        If you have a valid token, your response output will look similar to the following:
-        
-        ```        
+        ```      
 
         If you have a valid token, your response output will look similar to the following:
         
