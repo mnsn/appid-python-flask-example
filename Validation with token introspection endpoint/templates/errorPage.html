@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel='stylesheet' href='static/stylesheets/protected.css'/>
+</head>
+<body>
+<div id="maindiv" class="main-container">
+    <div class="top-container">
+        <div class="flex-top">
+            <img id="userProfileImg" class="user-profile" src="static/images/placeholder-hi.png">
+        </div>
+        <div class="flex-top">
+            <h1> An error occurd-<span id="userNameSpan"></span></h1>
+
+        </div>
+    </div>
+    <div class="bottom-container">
+        <div class="flex-bottom">
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+$("#maindiv").attr('style', 'visibility: visible');
+$('#userNameSpan').html('{{ name}}');
+$('#userProfileImg').attr('src', '{{ picture}}');
+</script>
+</body>
+</html>
