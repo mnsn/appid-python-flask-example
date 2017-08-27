@@ -161,23 +161,23 @@ You can grant a user access to a protected resource by using the authorization p
         
         ```python
         def validateTokenWithIntrospection(token,client_id,client_secret):
-        serviceConfig = ServiceConfig()
-        url = serviceConfig.serverUrl + INTROSPECTION_PATH
-        payload = token
-        headers = {
-            'content-type': "application/x-www-form-urlencoded",
-            'authorization': "Basic " + base64.b64encode(client_id+':'+client_secret),
-            'cache-control': "no-cache",
-        }
-        response = requests.request("POST", url, data="token=" +payload, headers=headers)
-        print(response.text)
-        if(response.status_code == 200):
-            if(json.loads(response.text)['active']==True):
-                return True
-            if(json.loads(response.text)['active'] == False):
-                return False; 
-        else:
-            return response.text
+            serviceConfig = ServiceConfig()
+            url = serviceConfig.serverUrl + INTROSPECTION_PATH
+            payload = token
+            headers = {
+                'content-type': "application/x-www-form-urlencoded",
+                'authorization': "Basic " + base64.b64encode(client_id+':'+client_secret),
+                'cache-control': "no-cache",
+            }
+            response = requests.request("POST", url, data="token=" +payload, headers=headers)
+            print(response.text)
+            if(response.status_code == 200):
+                if(json.loads(response.text)['active']==True):
+                    return True
+                if(json.loads(response.text)['active'] == False):
+                    return False; 
+            else:
+                return response.text
         ```      
 
         If you have a valid token, your response output will look similar to the following:
